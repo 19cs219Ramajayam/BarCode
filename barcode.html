@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="barcode.css">
+    <title>Bar Code</title>
+</head>
+<body>
+    <div class="c">
+        <h1 id="t">Bar Code Generated Successfully</h1>
+        <h2 id="bar">Bar Code</h2>
+        <br>
+        <h2 id="scan">Scan Me</h2>
+        <div class="center">
+            <svg id="barcode"></svg>
+        </div>
+        <h1 id="t1">Generating Bar Code</h1>
+        <div class="center">
+    <form action="" id="form">
+        <input type="text" name="value" id="value" placeholder="Information">
+    </form>
+</div>
+<div class="center">
+<button onclick="download()" id="down"><i class="fa fa-download" aria-hidden="true"></i> download</button>
+</div>   
+<div class="cen">
+    <button onclick="newBarCode()" id="new">new bar code</button>
+    <button onclick="randomBarCode()" id="random">random bar code</button>
+</div>
+</div>
+</body>
+<script src="JsBarcode.all.min.js"></script>
+<script>
+    function newBarCode(){
+    var get=document.getElementById("value");
+    if(get.value==""){
+        alert("Enter The Information......");
+        get.style="border:2px solid red";
+    }
+    else{
+    JsBarcode("#barcode",get.value, {
+        fontSize: 40
+});
+    document.getElementById("new").style.display="none";
+    document.getElementById("random").style.display="none";
+    document.getElementById("value").style.display="none";
+    document.getElementById("t1").style.display="none";
+    document.getElementById("down").style.display="block";
+    document.getElementById("t").style.display="block";
+}
+}
+function randomBarCode(){
+    var rand=Math.floor(100000000000 + Math.random() * 900000000000);;
+    JsBarcode("#barcode",rand , {
+    fontSize: 40,
+    width: 4,
+    height: 100
+});
+    document.getElementById("new").style.display="none";
+    document.getElementById("random").style.display="none";
+    document.getElementById("value").style.display="none";
+    document.getElementById("t1").style.display="none";
+    document.getElementById("down").style.display="block";
+    document.getElementById("t").style.display="block";
+}
+function download(){
+            window.print();
+        }
+    </script>
+</html>
